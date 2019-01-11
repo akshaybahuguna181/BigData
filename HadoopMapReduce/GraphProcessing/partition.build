@@ -1,0 +1,11 @@
+#!/bin/bash
+
+rm -rf partition.jar classes
+
+module load hadoop/2.6.0
+
+mkdir -p classes
+javac -d classes -cp classes:`$HADOOP_HOME/bin/hadoop classpath` src/main/java/GraphPartition.java
+jar cf partition.jar -C classes .
+
+echo "Compilation completed."

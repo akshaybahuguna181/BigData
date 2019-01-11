@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH -A uot143
+#SBATCH --job-name="kmeans.local"
+#SBATCH --output="kmeans.local.out"
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --export=ALL 
+#SBATCH --time=10
+
+module load hadoop/2.6.0
+
+rm -rf output
+hadoop --config $HOME jar kmeans.jar KMeans points-small.txt centroids.txt output

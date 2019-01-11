@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>cse6331-P3</artifactId>
+  <groupId>edu.uta.cse6331</groupId>
+  <packaging>jar</packaging>
+  <version>0.1</version>
+  <name>CSE6331 Project #3</name>
+
+  <properties>
+    <hadoop.version>2.6.0</hadoop.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-hdfs</artifactId>
+        <version>${hadoop.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-mapreduce-client-core</artifactId>
+        <version>${hadoop.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-common</artifactId>
+        <version>${hadoop.version}</version>
+    </dependency>
+    <dependency>
+		<groupId>jdk.tools</groupId>
+		<artifactId>jdk.tools</artifactId>
+		<version>1.7.0_05</version>
+		<scope>system</scope>
+		<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
+</dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+        <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.2</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <finalName>${project.artifactId}</finalName>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>GraphPartition</mainClass>
+                </transformer>
+              </transformers>
+              <artifactSet>
+              <includes>
+              	<include>GraphPartition</include>
+              </includes>
+              </artifactSet>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+</build>
+
+</project>
