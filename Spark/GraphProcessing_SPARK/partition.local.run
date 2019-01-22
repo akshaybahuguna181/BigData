@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH -A uot143
+#SBATCH --job-name="partition.local"
+#SBATCH --output="partition.local.out"
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=2
+#SBATCH --export=ALL 
+#SBATCH --time=10
+
+module load hadoop/2.6.0 spark/1.5.2
+
+spark-submit --class Partition --master local[2] partition.jar small-graph.txt

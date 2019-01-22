@@ -1,0 +1,11 @@
+#!/bin/bash
+
+rm -rf partition.jar classes
+
+module load hadoop/2.6.0 spark/1.5.2
+
+mkdir -p classes
+/oasis/projects/nsf/uot143/fegaras/scala/bin/scalac -d classes -cp classes:`ls $SPARK_HOME/lib/spark-assembly*.jar` src/main/scala/Partition.scala
+jar cf partition.jar -C classes .
+
+echo "end"
